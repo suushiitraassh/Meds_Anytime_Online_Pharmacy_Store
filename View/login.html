@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .login-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+      }
+
+      .login-container label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+
+      .login-container input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+      }
+
+      .login-container button {
+        background-color: #3498db;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .login-container button:hover {
+        background-color: #2980b9;
+      }
+    </style>
+    <title>login page</title>
+  </head>
+  <body>
+    <!-- <label>Email <input type="text" class="email" /></label><br />
+    <label>Password <input type="text" class="password" /></label><br />
+    <button>submit</button> -->
+
+    <div class="login-container">
+      <h2>Login</h2>
+      <label for="username">Username:</label>
+      <input type="text" class="email" name="email" required />
+
+      <label for="password">Password:</label>
+      <input type="password" class="password" name="password" required />
+
+      <button>Login</button>
+      <a href="signup.html">Create an account</a>
+    </div>
+
+    <script>
+      let email = document.querySelector(".email");
+      let password = document.querySelector(".password");
+      let button = document.querySelector("button");
+
+      button.addEventListener("click", () => {
+        let obj = {
+          email: email.value,
+          password: password.value,
+        };
+
+        fetch("/api/v1/users/login", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        }).then((res) => {
+          if (res.ok) {
+            window.location.href = res.url;
+          } else {
+            alert(`Error:\nEmail or password is incorrect!!`);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

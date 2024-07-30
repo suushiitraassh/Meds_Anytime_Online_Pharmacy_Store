@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="#" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sign up</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      div {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+
+      input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <label>User Name <input type="text" class="userName" /></label><br />
+      <label>Name <input type="text" class="name" /></label><br />
+      <label>Email <input type="text" class="email" /></label><br />
+      <label>Password <input type="password" class="password" /></label><br />
+      <label>Confirm Password <input type="password" class="cPassword" /></label
+      ><br />
+      <button>send data</button>
+    </div>
+
+    <script>
+      let myName = document.querySelector(".name");
+      let userName = document.querySelector(".userName");
+      let email = document.querySelector(".email");
+      let password = document.querySelector(".password");
+      let confirmPassword = document.querySelector(".cPassword");
+
+      let button = document.querySelector("button");
+
+      button.addEventListener("click", () => {
+        let obj = {
+          name: myName.value,
+          userName: userName.value,
+          email: email.value,
+          password: password.value,
+          confirmPassword: confirmPassword.value,
+        };
+
+        fetch("/api/v1/users/signup", {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        }).then((res) => {
+          console.log(res);
+          if (res.ok) {
+            window.location.href = res.url;
+          } else {
+            alert(
+              `Error:\nPassword length :max8\nUsername :min3 max20\n or email is already in use\nor Username is already in use`
+            );
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
