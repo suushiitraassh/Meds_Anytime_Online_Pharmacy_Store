@@ -1,5 +1,7 @@
 # Meds-Anytime-Online-Pharmacy-Website-clone-
 
+Enhancing Accessibility and Efficiency in Pharmaceutical Services through a Comprehensive Online Pharmacy Platform.
+
 User Registration and Authentication:
 Allow users to create accounts, log in securely, and manage their profiles.
 
